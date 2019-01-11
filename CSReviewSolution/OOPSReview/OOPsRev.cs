@@ -10,8 +10,7 @@ namespace OOPSReview
     {
         static void Main(string[] args)
         {
-            Die myclass = new Die();
-            myclass.x = 5;
+            
         }
     }
 }
