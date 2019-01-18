@@ -67,7 +67,6 @@ namespace OOPSReview
                     throw new Exception("Die cannot be " 
                         + value.ToString() + " sided");
                 }
-                
             }
 
         }//public int Side
@@ -98,7 +97,7 @@ namespace OOPSReview
             {
                 if(string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("You must supply a color string for the die")
+                    throw new Exception("You must supply a color string for the die");
                 }
                 else
                 {
@@ -151,7 +150,7 @@ namespace OOPSReview
          * of instance creation to set the values of the internal
          * data members/auto properties
          */
-        public Die(int sides, string color, int facevalue)
+        public Die(int sides, string color)
         {
             Sides = sides;
             Color = color;
