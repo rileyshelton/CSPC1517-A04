@@ -51,6 +51,7 @@ namespace OOPSReview
                     {
                         case "A":
                             {
+                                Console.Clear();
                                 //Die is a non-static class
                                 theTurn = new Turn();
                                 //generate a new FaceValue
@@ -87,6 +88,7 @@ namespace OOPSReview
                             }
                         case "B":
                             {
+                                Console.Clear();
                                 string inputSides = "";
                                 int sides = 0;
 
@@ -122,12 +124,16 @@ namespace OOPSReview
                             }
                         case "C":
                             {
+                                Console.Clear();
                                 //Display the current players' stats
+                                DisplayCurrentPlayerStats(rounds);
                                 break;
                             }
                         case "X":
                             {
+                                Console.Clear();
                                 //Display the final players' stats
+                                DisplayCurrentPlayerStats(rounds);
                                 Console.WriteLine("\nThank you for playing.");
                                 break;
                             }
@@ -147,15 +153,29 @@ namespace OOPSReview
             } while (menuChoice.ToUpper() != "X");
         }//eomain
 
-        public static void DisplayCurrentPlayerStats(?????)
+        public static void DisplayCurrentPlayerStats(List<Turn> rounds)
         {
             
             int wins1 = 0;
             int wins2 = 0;
             int draws = 0;
 
-            //travser the List<Turn> to calculate wins, losses, and draws
-           
+            //travser the List<Turn> to calculate wins for each player, and draws
+           foreach(Turn item in rounds)
+            {
+                if(item.Player1 > item.Player2)
+                {
+                    wins1++;
+                }
+                else if (item.Player1 < item.Player2)
+                {
+                    wins2++;
+                }
+                else
+                {
+                    draws++;
+                }
+            }
 
             //display the results
             Console.WriteLine("\n Total Rounds: " + (wins1 + wins2 + draws).ToString());
