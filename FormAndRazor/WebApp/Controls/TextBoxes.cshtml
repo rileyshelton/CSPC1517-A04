@@ -1,0 +1,39 @@
+﻿@{
+    //THESE PAGES PROCESS PHYSICALLY FROM TOP TO BOTTOM
+
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "TextBoxes";
+
+    //Gather the data from the form
+    //ALL Data will come in as strings
+    var leftSide = Request.Form["leftinput"]; //if the .Form feild DOES NOT exist, null is returned
+    var rightSide = Request.Form["rightinput"];
+    var formButton = Request.Form["formbutton"]; //buttons have a value parameter
+
+}
+@section head{
+
+    <link href="~/Content/MyCustomStyles.css" rel="stylesheet" />
+}
+
+@section banner{
+    <h1>Text Boxes for Razor Form Samples</h1>
+}
+
+<!-- Content Body -->
+    <form id="theform" method="post">
+        <div class="col-sm-6">
+            <label for="leftinput">Your First Name:</label>
+            <input type="text" id="leftinput" name="leftinput" placeholder="Enter First Name" value="@leftSide"/>
+            <button type="submit" id="formbutton" name="formbutton" class="btn" value="leftinput">PRESS LEFT</button>
+        </div>
+        <div class="col-sm-6">
+            <label for="rightinput">Your Favourite Colour:</label>
+            <input type="text" id="rightinput" name="rightinput" placeholder="Enter Colour" value="@rightSide"/>
+            <button type="submit" id="formbutton" name="formbutton" class="btn" value="rightinput">PRESS RIGHT</button>
+        </div>
+    </form>
+
+@section footer{
+    &copy; CPSC1517 NAIT, all rights reserved
+}

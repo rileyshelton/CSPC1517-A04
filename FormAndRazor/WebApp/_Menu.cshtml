@@ -1,0 +1,31 @@
+﻿<!-- USING BOOTSTRAP TO FORMAT AND HANDLE THE MENU  -->
+
+<!-- Menu Area -->
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <!-- Branding area of the menu -->
+    <div class="navbar-header">
+        <a class="navbar-brand" style="font-size:x-large">
+            <strong>CPSC1517 - Razor</strong>
+        </a>
+    </div>
+    <!-- Menu Root Area -->
+    <ul class="nav navbar-nav">
+        <!-- Root Menu Item -->
+        <li><a href="@Href("~/Default.cshtml")">HOME</a></li>
+        <!-- Drop Down Sub Menu -->
+        <li class="dropdown">
+            <!-- Drop Down Menu Item Toggle -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONTROLS <b class="caret"></b></a>
+            <!-- Code the Drop Down Submenu Items -->
+            <ul class="dropdown-menu">
+                <li><a href="@Href("~/Controls/TextBoxes.cshtml")">TEXT BOXES</a></li>
+                <li><a href="@Href("~/Controls/RadioButtons.cshtml")">RADIO BUTTONS</a></li>
+                <li><a href="@Href("~/Controls/CheckBoxes.cshtml")">CHECK BOXES</a></li>
+                <li><a href="@Href("~/Controls/DropDown.cshtml")">DROP DOWN</a></li>
+            </ul>
+        </li>
+    </ul>
+
+
+</div>
