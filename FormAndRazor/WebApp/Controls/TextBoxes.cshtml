@@ -21,18 +21,60 @@
 }
 
 <!-- Content Body -->
-    <form id="theform" method="post">
+@if (IsPost)
+{
+    if (formButton.Equals("reset"))
+    {
+        leftSide = "";
+        rightSide = "";
+    }
+    else
+    {
+        //validation of data coming in
+        if (string.IsNullOrEmpty(leftSide) ||
+            string.IsNullOrEmpty(rightSide))
+        {
+            <p>Enter data in both input fields (Name and Colour).</p>
+        }
+        else
+        {
+            if (formButton.Equals("leftinput"))
+            {
+                <p>Hello. Your name is @leftSide.</p>
+            }
+            else
+            {
+                <p>@leftSide, your favourite colour is @rightSide.</p>
+            }
+        }
+    }
+}
+else
+{
+    <p>form is in initialzation</p>
+}
+
+<form id="theform" method="post">
+    <div class="row">
         <div class="col-sm-6">
             <label for="leftinput">Your First Name:</label>
-            <input type="text" id="leftinput" name="leftinput" placeholder="Enter First Name" value="@leftSide"/>
+            <input type="text" id="leftinput" name="leftinput" placeholder="Enter First Name" value="@leftSide" />
             <button type="submit" id="formbutton" name="formbutton" class="btn" value="leftinput">PRESS LEFT</button>
         </div>
         <div class="col-sm-6">
             <label for="rightinput">Your Favourite Colour:</label>
-            <input type="text" id="rightinput" name="rightinput" placeholder="Enter Colour" value="@rightSide"/>
+            <input type="text" id="rightinput" name="rightinput" placeholder="Enter Colour" value="@rightSide" />
             <button type="submit" id="formbutton" name="formbutton" class="btn" value="rightinput">PRESS RIGHT</button>
         </div>
-    </form>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-5">
+            <button type="submit" id="formbutton" name="formbutton" class="btn" value="reset">Reset</button>
+        </div>
+    </div>
+</form>
+
+
 
 @section footer{
     &copy; CPSC1517 NAIT, all rights reserved
