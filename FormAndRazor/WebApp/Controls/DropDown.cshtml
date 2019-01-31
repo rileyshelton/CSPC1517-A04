@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/_Layout.cshtml";
     Page.Title = "DropDown";
+    var selection = Request.Form["pageselection"];
 }
 @section head{
 
@@ -10,6 +11,62 @@
 @section banner{
     <h1>Drop Down for Razor Form Samples</h1>
 }
+
+@if (IsPost)
+{
+    //no button desicion (only 1 button)
+    //validation 
+    // the validation in this sample will be done inside the switch
+    //if a page was not selected, then the switch default will handle 
+    //  the "select ..." option
+
+    switch (selection.ToUpper())
+    {
+        case "TEXTBOXES":
+            {
+                //The object class for data going out is Response
+                // the method to direct you to another page is .Redirect(page)
+                //we will use relative addressing to get to another page
+                Response.Redirect("TextBoxes.cshtml");
+                break;
+            }
+        case "RADIOBUTTONS":
+            {
+                Response.Redirect("RadioButtons.cshtml");
+                break;
+            }
+        case "CHECKBOXES":
+            {
+                Response.Redirect("CheckBoxes.cshtml");
+                break;
+            }
+        default:
+            {
+                <p><span style="color:indianred"><strong>Select the sample you wish to view...</strong></span></p>
+                break;
+            }
+
+    }
+
+}
+
+<form id="theform" method="post">
+    <div class="row">
+        <div class="col-sm-offset-4">
+            <label for="pageselection">Select a Control Example:</label>
+            &nbsp;&nbsp;
+            <select id="pageselection" name="pageselection">
+                <option value="">select ...</option>
+                <option value="TextBoxes">Text Boxes</option>
+                <option value="RadioButtons">Radio Buttons</option>
+                <option value="CheckBoxes">Check Boxes</option>
+            </select>
+            &nbsp;&nbsp;
+            <button type="submit" id="formbutton" name="formbutton" value="Submit" class="btn btn-primary">Go To ...</button>
+
+        </div>
+    </div>
+</form>
 
 
 @section footer{
