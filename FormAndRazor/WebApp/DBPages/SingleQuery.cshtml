@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "SingleQuery";
+
+    var searcharg = Request.Form["searcharg"];
+    var regionid = "";
+    var desc = "";
+
+    /*
+     remeber the 1st pass of the page, searcharg will be null
+        BUT, for the db query it needs to be a number
+     */
+    if (string.IsNullOrEmpty(searcharg))
+    {
+        searcharg = "0";
+    }
+
+    /*
+     Open a connection to the database
+     use the connection string name attribute value
+     */
+
+    var db = Database.Open("NWDB");
+
+    /*
+     Create your SQL command that you wish to execute
+     a placeholder @n will be used for the query arguement
+     querty command cna be coded on multiple physical lines
+     */
+    var querycommand = "SELECT RegionID, RegionDescription " + "FROM Region " + "WHERE RegionID = @0";
+
+    /*
+     * execute order 66...
+     Execute the SQL query command against the database
+     .QuerySingle() -- Used when you expect a Single record to be returned
+     .Query() -- Used when you expect 0, 1, or more records to be returned
+     .QueryValue() -- Used when you expect a single value (NOT RECORD) to be returned
+     */
+    var results = db.QuerySingle(querycommand, searcharg);
+
+}
+
+
+@section head{
+
+    <link href="~/Content/MyCustomStyles.css" rel="stylesheet" />
+}
+
+<form id="theform" method="post">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="searcharg">Enter Region ID:</label><br />
+            <input type="text" id="searcharg" name="searcharg" placeholder="Enter Region ID" value="@searcharg" /><br />
+            <button type="submit" id="formbutton" name="formbutton" class="btn btn-primary" value="search">SEARCH</button>
+            &nbsp;&nbsp;
+            <button type="submit" id="formbutton" name="formbutton" class="btn" value="clear">CLEAR</button>
+        </div>
+        <div class="col-md-8">
+            <label for="regionid">Region ID:</label>
+            <input type="text" id="regionid" name="regionid" value="@regionid" />
+            <br />
+            <label for="desc">Region Name:</label>
+            <input type="text" id="desc" name="desc" value="@desc" />
+            <br />
+        </div>
+    </div>
+</form>
+
+
+@section banner{
+    <h1>Drop Down for Razor Form Samples</h1>
+}
+
+@section footer{
+    &copy; CPSC1517 NAIT, all rights reserved
+}
