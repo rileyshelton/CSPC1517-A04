@@ -1,15 +1,15 @@
 ﻿@{
-    //THESE PAGES PROCESS PHYSICALLY FROM TOP TO BOTTOM
+    //these pages process PHYSICALLY from TOP to BOTTOM
 
     Layout = "~/_Layout.cshtml";
     Page.Title = "TextBoxes";
 
-    //Gather the data from the form
-    //ALL Data will come in as strings
-    var leftSide = Request.Form["leftinput"]; //if the .Form feild DOES NOT exist, null is returned
-    var rightSide = Request.Form["rightinput"];
-    var formButton = Request.Form["formbutton"]; //buttons have a value parameter
-
+    // gather the data from the form
+    //data will come in as strings
+    //if the .Form field does NOT exist, null is returned
+    var leftside = Request.Form["leftinput"];
+    var rightside = Request.Form["rightinput"];
+    var thebutton = Request.Form["formbutton"];  //button has a value parameter
 }
 @section head{
 
@@ -17,59 +17,70 @@
 }
 
 @section banner{
-    <h1>Text Boxes for Razor Form Samples</h1>
+    <h1>TextBoxes for Razor Form Samples</h1>
 }
-
-<!-- Content Body -->
+<!-- content body-->
 @if (IsPost)
 {
-    if (formButton.Equals("reset"))
+    if (thebutton.Equals("reset"))
     {
-        leftSide = "";
-        rightSide = "";
+        leftside = "";
+        rightside = "";
     }
     else
     {
-        //validation of data coming in
-        if (string.IsNullOrEmpty(leftSide) ||
-            string.IsNullOrEmpty(rightSide))
+        //vaildation of data coming in
+        if (string.IsNullOrEmpty(leftside) ||
+            string.IsNullOrEmpty(rightside))
         {
-            <p>Enter data in both input fields (Name and Colour).</p>
+            <p>Enter data in both input fields (name and colour).</p>
         }
         else
         {
-            if (formButton.Equals("leftinput"))
+            if (thebutton.Equals("leftinput"))
             {
-                <p>Hello. Your name is @leftSide.</p>
+                <p>Hello. Your name is @leftside . </p>
             }
             else
             {
-                <p>@leftSide, your favourite colour is @rightSide.</p>
+                <p>@leftside , your favourite colour is @rightside . </p>
             }
         }
     }
 }
 else
 {
-    <p>form is in initialzation</p>
+    <p>this form is in initialization</p>
 }
-
 <form id="theform" method="post">
     <div class="row">
-        <div class="col-sm-6">
-            <label for="leftinput">Your First Name:</label>
-            <input type="text" id="leftinput" name="leftinput" placeholder="Enter First Name" value="@leftSide" />
-            <button type="submit" id="formbutton" name="formbutton" class="btn" value="leftinput">PRESS LEFT</button>
+        <div class="col-md-6">
+            <label for="leftinput">Your Name:</label>
+            <input type="text" id="leftinput" name="leftinput"
+                   placeholder="enter your name"
+                   value="@leftside" />
+            <button type="submit" id="formbutton" name="formbutton"
+                    class="btn" value="leftinput">
+                Press Left
+            </button>
         </div>
-        <div class="col-sm-6">
+        <div class="col-md-6">
             <label for="rightinput">Your Favourite Colour:</label>
-            <input type="text" id="rightinput" name="rightinput" placeholder="Enter Colour" value="@rightSide" />
-            <button type="submit" id="formbutton" name="formbutton" class="btn" value="rightinput">PRESS RIGHT</button>
+            <input type="text" id="rightinput" name="rightinput"
+                   placeholder="enter your colour"
+                   value="@rightside" />
+            <button type="submit" id="formbutton" name="formbutton"
+                    class="btn" value="rightinput">
+                Press Right
+            </button>
         </div>
     </div>
     <div class="row">
         <div class="col-md-offset-5">
-            <button type="submit" id="formbutton" name="formbutton" class="btn" value="reset">Reset</button>
+            <button type="submit" id="formbutton" name="formbutton"
+                    class="btn" value="reset">
+                Reset
+            </button>
         </div>
     </div>
 </form>
@@ -77,5 +88,6 @@ else
 
 
 @section footer{
-    &copy; CPSC1517 NAIT, all rights reserved
+    &copy; CPSC1517 Nait, all rights reservered
 }
+
