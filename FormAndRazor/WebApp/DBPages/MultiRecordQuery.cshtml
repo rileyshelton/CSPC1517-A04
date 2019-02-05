@@ -2,7 +2,7 @@
     Layout = "~/_Layout.cshtml";
     Page.Title = "MultiRecord Query";
 
-    var categorylist = Request.Form["categorycist"];
+    var categorylist = Request.Form["categorylist"];
     if (categorylist == null)
     {//the first time the content page is activated
      //  the categorylist will be null because there was
@@ -19,6 +19,8 @@
     var ddlcommand = "SELECT CategoryID, CategoryName "
                     + "FROM Categories "
                     + "ORDER BY CategoryName";
+    //the command will return 0, 1, or more records
+    //therefore use .Query()
     var ddlResults = db.Query(ddlcommand);
 
     @section head{
@@ -46,10 +48,25 @@
 
         //query the database using the choice from the dropdown list
 
-        //code here
-
+        //the database is already attached
+        //create command
+        var querycommand = "SELECT ProductID "
+                         + "FROM Products "
+                         + "WHERE CategoryID = @0";
+        //execute using .Query() fkey lookup 1:n
+        var results = db.Query(querycommand, categorylist);
 
         //check the results of the query
+        if (results.Count() == 0)
+        {
+            //empty results
+            <p><span style="color:cornflowerblue">No products found for your select category. Select a differnet category...</span></p>
+        }
+        else
+        {
+
+        }
+
 
         //empty results code here
 
@@ -61,6 +78,8 @@
         //multiple arguments are separated by a &
         //this uses the Get posting so the value will appear
         //   on the url
+        Response.Redirect("MultiRecordWebGrid.cshtml?cid="
+                          + categorylist);
 
     }
 }
@@ -78,7 +97,12 @@
             <select id="categorylist" name="categorylist">
                 <option value="0">select ...</option>
                 <!--  loop code here-->
-
+                @foreach (var catitem in ddlResults)
+                {
+                    <option value="@catitem.CategoryID">
+                        @catitem[1]
+                    </option>
+                }
             </select>
             &nbsp;&nbsp;
             <button type="submit" id="formbutton" name="formbutton"

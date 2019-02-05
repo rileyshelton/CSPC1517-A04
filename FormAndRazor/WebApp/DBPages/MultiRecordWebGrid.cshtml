@@ -3,11 +3,18 @@
     Page.Title = "WebGrid";
 
     //access the argument label from the sending page using .QueryString["xxx"]
-    //QueryString returns either null (if argument did not exists) or
+    //QueryString returns either null (if argument did not exists) 
+    // or
     //   a string value
-
+    var catid = Request.QueryString["cid"];
 
     //check that a value was passed
+    if (string.IsNullOrEmpty(catid))
+    {
+        Response.Redirect("MultiRecordQuery.cshtml");
+    }
+
+
 
     //query the database using the passed value
     var db = Database.Open("NWDB");
@@ -16,18 +23,18 @@
                         + "WHERE CategoryID = @0";
     //QueryValue returns a single value (not a record) from the  query
     //this value will be used in titling the WebGrid display
-    //var categoryname = db.QueryValue(scalarcommand, categoryid);
+    var categoryname = db.QueryValue(scalarcommand, catid);
 
     var querycommand = "SELECT ProductID, ProductName, UnitPrice, UnitsInStock, Discontinued "
                         + "FROM Products "
                         + "WHERE CategoryID = @0 "
                         + "ORDER BY 2";
-    //var results = db.Query(querycommand, categoryid);
+    var results = db.Query(querycommand, catid);
 
     //create an instance of WebGrid
     //notice the collection is passed at the time of instantiation
 
-    //code here
+    var gridinstance = new WebGrid(results);
 
 }
 
@@ -40,10 +47,12 @@
 }
 
 <div class="row">
-    <div class="col-sm-offset-3">
-        <span style="font-size:x-large"><strong>Products for XXXXXXXX</strong></span>
+    <div class="col-md-12">
+        <span style="font-size:x-large"><strong>Products for @categoryname</strong></span>
         <!--Display the WebGrid instance in its default display-->
-
+        @gridinstance.GetHtml(
+    tableStyle: "table table-bordered table-striped table-hover")
+        
     </div>
 </div>
 
