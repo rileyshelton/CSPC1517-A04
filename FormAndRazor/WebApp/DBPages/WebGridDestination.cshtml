@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "WebGrid Destination";
+    var pid = Request.QueryString["pid"];
+}
+
+
+@section head{
+
+    <link href="~/Content/MyCustomStyles.css" rel="stylesheet" />
+}
+
+@section banner{
+    <h1>WebGrid Destination</h1>
+}
+    <p>You Passed the data value @pid.</p>
+
+@section footer{
+    &copy; CPSC1517 Nait 2019, all rights reserved
+}
