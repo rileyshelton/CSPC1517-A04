@@ -11,6 +11,8 @@
     <siteMapNode url="" title="SamplePages" description="">
       <siteMapNode url="~/SamplePages/HelloWorld.aspx" title="Hello World"  description="" />
       <siteMapNode url="~/SamplePages/BasicControls.aspx" title="Basic Controls"  description="" />
+      <siteMapNode url="~/SamplePages/JobApplication.aspx" title="Job Application"  description="" />
+      <siteMapNode url="~/SamplePages/ContestEntry.aspx" title="Contest Entry"  description="" />
     </siteMapNode>
     
   </siteMapNode>

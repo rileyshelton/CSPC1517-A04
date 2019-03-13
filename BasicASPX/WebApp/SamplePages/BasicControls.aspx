@@ -5,7 +5,7 @@
         <tr>
             <td align="right">Enter your choice (1 - 4):</td>
             <td>
-                <asp:TextBox ID="TextBoxNumericChoice" runat="server" OnTextChanged="TextBoxNumericChoice_TextChanged"></asp:TextBox> &nbsp;&nbsp;
+                <asp:TextBox ID="TextBoxNumericChoice" runat="server" ></asp:TextBox> &nbsp;&nbsp;
                 <asp:Button ID="SubMitButton" runat="server" Text="Submit Choice" OnClick="SubMitButton_Click" />
             </td>
         </tr>
@@ -48,7 +48,9 @@
             <td>
                 <asp:DropDownList ID="CollectionList" runat="server">
                 </asp:DropDownList>
-            </td>
+                &nbsp;&nbsp;
+                <asp:Button ID="LeftSubmit" runat="server" Text="Button" OnClick="LeftSubmit_Click" />
+             </td>
         </tr>
         <tr>
             <td>&nbsp;</td>

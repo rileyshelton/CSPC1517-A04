@@ -9,17 +9,14 @@ namespace WebApp
     {
         public int ValueField { get; set; }
         public string DisplayField { get; set; }
-
         public DDLClass()
         {
-            //Default
+            //default
         }
-        public DDLClass(int valueifeld, string displayfield)
+        public DDLClass(int valuefield, string displayfield)
         {
-            ValueField = valueifeld;
+            ValueField = valuefield;
             DisplayField = displayfield;
-
-
         }
     }
 }
