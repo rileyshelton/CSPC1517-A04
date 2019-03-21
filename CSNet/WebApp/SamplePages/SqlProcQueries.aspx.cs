@@ -53,6 +53,58 @@ namespace WebApp.SamplePages
 
         }
 
-       
+        protected void Submit_Click(object sender, EventArgs e)
+        {
+            //Ensure a selection was made
+            if(CategoryList.SelectedIndex == 0)
+            {
+                //  No selection: Message to user
+                MessageLabel.Text = "Please select a category...";
+
+            }
+            else
+            {
+                //  Yes selection: Proccess lookup
+                //    user friendly error handling
+                try
+                {
+                    //      Create and connect to BLL class
+                    ProductController sysmgr = new ProductController();
+                    //      Issuse request for lookup to appropriate BLL class Method
+                    //        and capture results
+
+                    List<Product> datainfo = sysmgr.Product_GetByCategory(int.Parse(CategoryList.SelectedValue));
+                    //      check results (  .Count() ==0)
+                    if(datainfo.Count() ==0)
+                    {
+                        //      No records: Message to user
+                        MessageLabel.Text = "No Data found for selected Category....";
+                        //removed old data (optional)
+                        //not confused w/ this message
+                        CategoryProductList.DataSource = null;
+                        CategoryProductList.DataBind();
+                    }
+                    else
+                    {
+                        //      Yes Records: display data
+                        CategoryProductList.DataSource = datainfo;
+                        CategoryProductList.DataBind();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageLabel.Text = ex.Message;
+                }
+
+            }
+
+        }
+
+        protected void Clear_Click(object sender, EventArgs e)
+        {
+            CategoryList.ClearSelection();
+            CategoryProductList.DataSource = null;
+            CategoryProductList.DataBind();
+        }
     }
 }

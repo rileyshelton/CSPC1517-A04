@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 #region Additional Namespaces
 using NorthwindSystem.Data;
 using NorthwindSystem.DAL;
-
+using System.Data.SqlClient; //access to sql parameter
 #endregion
 
 namespace NorthwindSystem.BLL
@@ -42,6 +42,31 @@ namespace NorthwindSystem.BLL
             using (var context = new NorthwindContext())
             {
                 return context.Products.ToList();
+            }
+        }
+
+        //sometimes youll need to code a method and cant use .Find(pkey)
+        // You can call SQL Procs via your context class within your BLL class method
+        //you will use .Database.SqlQuery<T>()
+        //the arguement(s) for DqlQuery are
+        //  a) the sql proc execute statement (as a string)
+        //  b) i frquired any arg for the proc
+        //passing the data arg to the proc will make use og the SqlParameter() Object
+        // the SqlParameter() Object needs a using clause
+        //SqlParemeter takes 2 args
+        //  a) proc param name
+        //  b) the value to be passed
+        public List<Product>  Product_GetByCategory(int categoryid)
+        {
+            using (var context = new NorthwindContext())
+            {
+                //usually you will find data from EntityFramework returns as an IEninumerable<T> datatype 
+                // one can convert IEnumerable<T> to List<T> with .ToList();
+                IEnumerable<Product> results =
+                    context.Database.SqlQuery<Product>(
+                        "Products_GetByCategories @CategoryID",
+                        new SqlParameter("CategoryID", categoryid));
+                return results.ToList();
             }
         }
     }
