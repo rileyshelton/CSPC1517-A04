@@ -57,7 +57,7 @@ namespace WebApp.SamplePages
                     int province = Province.SelectedIndex;
                     string emailaddress = EmailAddress.Text;
 
-                    ApplicationInfo.DataSource = DataBindingCollection;
+                    GridViewRowCollection.DataSource = DataBindingCollection;
                 }
 
                 else
